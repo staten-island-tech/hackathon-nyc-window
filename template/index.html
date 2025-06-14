@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Kanye Quotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <h1>Kanye Quotes</h1>
+
+  <form method="GET" action="/" style="margin-bottom: 30px;">
+    <input type="text" name="q" placeholder="Search quotes..." value="{{ search_query or '' }}"
+           style="padding: 10px; width: 250px; border-radius: 6px; border: 1px solid #6a0dad;">
+    <button type="submit"
+            style="padding: 10px 15px; border-radius: 6px; border: none; background-color: #d4af37; color: #2e004f; font-weight: bold;">
+      Search
+    </button>
+  </form>
+
+  {% if not quotes %}
+    <p>No quotes found matching your search.</p>
+  {% endif %}
+
+  <div class="card-container">
+    {% for quote in quotes %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ quote.name }}</h5>
+          <p class="card-text">Year: {{ quote.year }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
