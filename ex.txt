@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Kanye Quotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container quote-detail">
+    <h1>{{ quote.name }}</h1>
+    <p><strong>Quote:</strong> "{{ quote.quote }}"</p>
+    <p><strong>Author:</strong> {{ quote.author }}</p>
+    <p><strong>Year:</strong> {{ quote.year }}</p>
+    <p><strong>Source:</strong> {{ quote.source }}</p>
+
+    <a href="/">← Back to Home</a>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kanye Quotes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Kanye Quotes</h1>
+
+    <form method="GET" action="/" class="search-bar">
+      <input type="text" name="q" placeholder="Search quotes..." value="{{ search_query or '' }}">
+      <button type="submit">Search</button>
+    </form>
+
+    {% if not quotes %}
+      <p class="no-quotes">No quotes found.</p>
+    {% endif %}
+
+    <div class="quotes-grid">
+      {% for quote in quotes %}
+        <div class="quote-card">
+          <p class="quote-text">“{{ quote.quote }}”</p>
+          <p class="quote-meta">— {{ quote.author }} ({{ quote.year }})</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    <form method="GET" action="/">
+      <button type="submit" class="refresh-btn">🔁 Refresh Quotes</button>
+    </form>
+  </div>
+</body>
+</html>
